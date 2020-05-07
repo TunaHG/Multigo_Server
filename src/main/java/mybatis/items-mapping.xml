@@ -5,24 +5,24 @@
 	<!-- CRUD : insert, select, update, delete sql -->
 	<insert id="insertItem" parameterType="items">
 		INSERT INTO ITEMS 
-		VALUES(#{ITEM_ID}, #{NAME}, #{PRICE})
+		VALUES(#{item_id}, #{name}, #{price})
 	</insert>
 	
 	<select id="selectItem" parameterType="String" resultType="items">
 		SELECT * 
 		FROM ITEMS 
-		WHERE ITEM_ID = #{ITEM_ID}
+		WHERE ITEM_ID = #{item_id}
 	</select>
 	
 	<update id="updateItem" parameterType="items">
 		UPDATE ITEMS
-		SET NAME = #{NAME}, PRICE = #{PRICE}
-		WHERE ITEM_ID = #{ITEM_ID}
+		SET NAME = #{name}, PRICE = #{price}
+		WHERE ITEM_ID = #{item_id}
 	</update>
 	
 	<delete id="deleteItem" parameterType="String">
 		DELETE ITEMS
-		WHERE ITEM_ID = #{ITEM_ID}
+		WHERE ITEM_ID = #{item_id}
 	</delete>
 </mapper>
 

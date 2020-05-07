@@ -5,24 +5,24 @@
 	<!-- CRUD : insert, select, update, delete sql -->
 	<insert id="insertNewItem" parameterType="markets">
 		INSERT INTO MARKETS 
-		VALUES(#{MARKET_ID}, #{ITEM_ID}, #{STOCK})
+		VALUES(#{market_id}, #{item_id}, #{stock})
 	</insert>
 	
 	<select id="currentStockInMarket" parameterType="markets" resultType="int">
 		SELECT STOCK 
 		FROM MARKETS 
-		WHERE MARKET_ID = #{MARKET_ID} AND ITEM_ID = #{ITEM_ID}
+		WHERE MARKET_ID = #{market_id} AND ITEM_ID = #{item_id}
 	</select>
 	
 	<update id="updateStockInMarket" parameterType="markets">
 		UPDATE MARKETS 
-		SET STOCK = #{STOCK}
-		WHERE MARKET_ID = #{MARKET_ID} AND ITEM_ID = #{ITEM_ID}
+		SET STOCK = #{stock}
+		WHERE MARKET_ID = #{market_id} AND ITEM_ID = #{item_id}
 	</update>
 	
 	<delete id="deleteItemInMarket" parameterType="markets">
 		DELETE MARKETS
-		WHERE MARKET_ID = #{MARKET_ID} AND ITEM_ID = #{ITEM_ID}
+		WHERE MARKET_ID = #{market_id} AND ITEM_ID = #{item_id}
 	</delete>
 </mapper>
 
