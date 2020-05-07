@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="emp">
+	<!-- CRUD : insert, select, update, delete sql -->
+	<insert id="insertitem" parameterType="items">
+		INSERT INTO ITEMS 
+		VALUES(#{ITEM_ID}, #{NAME}, #{PRICE})
+	</insert>
+	
+	<select id="selectitem" parameterType="String" resultType="items">
+		SELECT * 
+		FROM ITEMS 
+		WHERE ITME_ID = #{ITEM_ID}
+	</select>
+	
+	<update id="updateitem" parameterType="items">
+		UPDATE ITEMS
+		SET NAME = #{NAME}, PRICE = #{PRICE}
+		WHERE ITEM_ID = #{ITEM_ID}
+	</update>
+	
+	<delete id="deleteitem" parameterType="String">
+		DELETE ITEMS
+		WHERE ITEM_ID = #{ITEM_ID}
+	</delete>
+</mapper>
+
