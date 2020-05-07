@@ -9,19 +9,19 @@ public class ItemsDAO {
 	}	
 	
 	public void addItem(ItemsVO vo) {
-		session.insert("insertitem", vo);
+		session.insert("insertItem", vo);
 	}
 	
 	public ItemsVO getItem(String item_id) {
-		ItemsVO vo = session.selectOne("selectitem", item_id);
+		ItemsVO vo = session.selectOne("selectItem", item_id);
 		return vo;
 	}
 	
 	public void updateItem(ItemsVO vo) {
-		session.update("updateitem", vo);
+		session.update("updateItem", vo);
 	}
 	
 	public void deleteItem(ItemsVO vo) {
-		session.delete("deleteitem", vo);
+		session.delete("deleteItem", vo);
 	}
 }

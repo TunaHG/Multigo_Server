@@ -3,24 +3,24 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="emp">
 	<!-- CRUD : insert, select, update, delete sql -->
-	<insert id="insertitem" parameterType="items">
+	<insert id="insertItem" parameterType="items">
 		INSERT INTO ITEMS 
 		VALUES(#{ITEM_ID}, #{NAME}, #{PRICE})
 	</insert>
 	
-	<select id="selectitem" parameterType="String" resultType="items">
+	<select id="selectItem" parameterType="String" resultType="items">
 		SELECT * 
 		FROM ITEMS 
 		WHERE ITME_ID = #{ITEM_ID}
 	</select>
 	
-	<update id="updateitem" parameterType="items">
+	<update id="updateItem" parameterType="items">
 		UPDATE ITEMS
 		SET NAME = #{NAME}, PRICE = #{PRICE}
 		WHERE ITEM_ID = #{ITEM_ID}
 	</update>
 	
-	<delete id="deleteitem" parameterType="String">
+	<delete id="deleteItem" parameterType="String">
 		DELETE ITEMS
 		WHERE ITEM_ID = #{ITEM_ID}
 	</delete>
