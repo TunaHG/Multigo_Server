@@ -11,7 +11,7 @@
 	<select id="selectItem" parameterType="String" resultType="items">
 		SELECT * 
 		FROM ITEMS 
-		WHERE ITME_ID = #{ITEM_ID}
+		WHERE ITEM_ID = #{ITEM_ID}
 	</select>
 	
 	<update id="updateItem" parameterType="items">
