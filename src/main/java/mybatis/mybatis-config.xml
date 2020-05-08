@@ -8,6 +8,7 @@
 		<typeAlias type="mybatis.ItemsVO" alias="items"/>
 		<typeAlias type="mybatis.MarketsVO" alias="markets"/>
 		<typeAlias type="mybatis.LaisVO" alias="lais"/>
+		<typeAlias type="mybatis.ListVO" alias="list"/>
 	</typeAliases>
 	<environments default="multigo">
 		<environment id="multigo">
