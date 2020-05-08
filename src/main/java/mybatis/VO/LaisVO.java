@@ -1,4 +1,4 @@
-package mybatis;
+package mybatis.VO;
 
 public class LaisVO {
 	private int list_id;

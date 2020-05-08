@@ -1,6 +1,8 @@
-package mybatis;
+package mybatis.DAO;
 
 import org.apache.ibatis.session.SqlSession;
+
+import mybatis.VO.ItemsVO;
 
 public class ItemsDAO {
 	SqlSession session;

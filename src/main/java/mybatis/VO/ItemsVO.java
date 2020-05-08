@@ -1,4 +1,4 @@
-package mybatis;
+package mybatis.VO;
 
 public class ItemsVO {
 	private String item_id;

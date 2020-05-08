@@ -1,4 +1,4 @@
-package mybatis;
+package mybatis.VO;
 
 public class MarketsVO {
 	private int market_id;

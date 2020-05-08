@@ -9,6 +9,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+import mybatis.DAO.ItemsDAO;
+import mybatis.VO.ItemsVO;
+
 public class Main {
 	static BufferedReader br;
 	static ItemsDAO dao;

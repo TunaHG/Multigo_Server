@@ -5,9 +5,10 @@
   
 <configuration>
 	<typeAliases>
-		<typeAlias type="mybatis.ItemsVO" alias="items"/>
-		<typeAlias type="mybatis.MarketsVO" alias="markets"/>
-		<typeAlias type="mybatis.LaisVO" alias="lais"/>
+		<typeAlias type="mybatis.VO.ItemsVO" alias="items"/>
+		<typeAlias type="mybatis.VO.MarketsVO" alias="markets"/>
+		<typeAlias type="mybatis.VO.LaisVO" alias="lais"/>
+		<typeAlias type="mybatis.VO.ListsVO" alias="lists"/>
 	</typeAliases>
 	<environments default="multigo">
 		<environment id="multigo">
@@ -21,8 +22,9 @@
 		</environment>
 	</environments>
 	<mappers>
-		<mapper resource="mybatis/items-mapping.xml"/>
-		<mapper resource="mybatis/markets-mapping.xml"/>
-		<mapper resource="mybatis/lais-mapping.xml"/>
+		<mapper resource="mybatis/mapping/items-mapping.xml"/>
+		<mapper resource="mybatis/mapping/markets-mapping.xml"/>
+		<mapper resource="mybatis/mapping/lais-mapping.xml"/>
+		<mapper resource="mybatis/mapping/lists-mapping.xml"/>
 	</mappers>
 </configuration>
