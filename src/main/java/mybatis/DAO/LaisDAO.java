@@ -36,24 +36,24 @@ public class LaisDAO {
 	}
 	
 	/*
-	 * # Included in Service
+	 * # Not Included in Service
 	 * Update Item's count in Certain Receipt list
 	 * 사용자가 장바구니에 담긴 Item의 개수를 조정할 때 사용하는 method
 	 */
-	public void updateLais(LaisVO vo) {
-		// Sql: UPDATE LISTS_AND_ITEMS SET CNT = #{cnt} WHERE LIST_ID = #{list_id} AND ITEM_ID = #{item_id}
-		session.update("updateLais", vo);
-		System.out.println("[Server]\t[LaisDAO]\tUpdate Item's Count in Receipt list");
-	}
+//	public void updateLais(LaisVO vo) {
+//		// Sql: UPDATE LISTS_AND_ITEMS SET CNT = #{cnt} WHERE LIST_ID = #{list_id} AND ITEM_ID = #{item_id}
+//		session.update("updateLais", vo);
+//		System.out.println("[Server]\t[LaisDAO]\tUpdate Item's Count in Receipt list");
+//	}
 	
 	/*
-	 * # Included in Service
+	 * # Not Included in Service
 	 * Delete Item in Receipt list
 	 * 사용자가 장바구니에 담긴 Item을 제거했을 때 사용하는 method
 	 */
-	public void deleteLais(LaisVO vo) {
-		// Sql: DELETE LISTS_AND_ITEMS WHERE LIST_ID = #{list_id} AND ITEM_ID = #{item_id}
-		session.delete("deleteLais", vo);
-		System.out.println("[Server]\t[LaisDAO]\tDelete Item in Receipt");
-	}
+//	public void deleteLais(LaisVO vo) {
+//		// Sql: DELETE LISTS_AND_ITEMS WHERE LIST_ID = #{list_id} AND ITEM_ID = #{item_id}
+//		session.delete("deleteLais", vo);
+//		System.out.println("[Server]\t[LaisDAO]\tDelete Item in Receipt");
+//	}
 }

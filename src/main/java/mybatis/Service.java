@@ -62,51 +62,11 @@ public class Service {
 	}
 	
 	/*
-	 * Update Purchase History
-	 * 생성된 List에 Item을 추가하거나 제거할때 Update를 해서 총액을 갱신
-	 */
-	public void updateListTotal(ListsVO vo) {
-		ldao.updateListTotal(vo);
-	}
-	
-	/*
-	 * Update Purchase Date in Receipt
-	 * 퇴장시 현재 장바구니의 구매시간을 변경
-	 */
-	public void updateListDate(ListsVO vo) {
-		ldao.updateListDate(vo);
-	}
-	
-	/*
-	 * Delete Purchase History
-	 * 장바구니가 생성된 이후 Item을 구입하지 않은 상태로 퇴장하였을 때 장바구니 삭제
-	 */
-	public void deleteList(int list_id) {
-		ldao.deleteList(list_id);
-	}
-	
-	/*
 	 * Add Purchase Item
 	 * 장바구니에 Item이 추가될 때마다 세부내역 추가
 	 */
 	public void addLais(LaisVO vo) {
 		lidao.addLais(vo);
-	}
-	
-	/*
-	 * Delete Purchase Item
-	 * 장바구니에 담긴 Item을 제거
-	 */
-	public void deleteLais(LaisVO vo) {
-		lidao.deleteLais(vo);
-	}
-	
-	/*
-	 * Update Purchase Item
-	 * 장바구니에 담긴 Item의 개수(cnt)를 변경
-	 */
-	public void updateLais(LaisVO vo) {
-		lidao.updateLais(vo);
 	}
 	
 	/*

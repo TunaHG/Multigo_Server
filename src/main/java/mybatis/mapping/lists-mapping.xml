@@ -5,7 +5,7 @@
 	<!-- CRUD : insert, select, update, delete sql -->
 	<insert id="insertList" parameterType="lists">
 		INSERT INTO LISTS 
-		VALUES(LIST_SEQUENCE.NEXTVAL, #{purchase_date}, #{total}, #{user_id})
+		VALUES(LIST_SEQUENCE.NEXTVAL, SYSDATE, #{total}, #{user_id})
 	</insert>
 	
 	<select id="selectAllList" parameterType="String" resultType="lists">
@@ -14,7 +14,7 @@
 		WHERE USER_ID = #{user_id}
 	</select>
 	
-	<update id="updateListTotal" parameterType="lists">
+	<!-- <update id="updateListTotal" parameterType="lists">
 		UPDATE LISTS
 		SET TOTAL = #{total}
 		WHERE LIST_ID = #{list_id}
@@ -29,6 +29,6 @@
 	<delete id="deleteList" parameterType="int">
 		DELETE LISTS
 		WHERE LIST_ID = #{list_id}
-	</delete>
+	</delete> -->
 </mapper>
 

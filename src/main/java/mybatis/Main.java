@@ -14,14 +14,14 @@ import mybatis.VO.ItemsVO;
 
 public class Main {
 	static BufferedReader br;
-	static ItemsDAO dao;
+	static Service service;
 	public static void main(String[] args) throws Exception {
 		SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
 		SqlSessionFactory factory = builder.build(Resources.getResourceAsReader("mybatis/mybatis-config.xml"));
 		SqlSession session = factory.openSession(true);
 
-		dao = new ItemsDAO();
-		dao.setSession(session);
+		service = new Service();
+		service.setSession(session);
 		
 		br = new BufferedReader(new InputStreamReader(System.in));
 		
@@ -32,7 +32,7 @@ public class Main {
 				try {
 					while((command = br.readLine()) != null) {
 						if(command.startsWith("@@gI")) {
-							ItemsVO vo = dao.getItem("ITEM001");
+							ItemsVO vo = service.getItem("ITEM001");
 							System.out.println(vo.getName());
 							System.out.println(vo.getPrice());
 						}
