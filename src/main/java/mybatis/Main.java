@@ -1,48 +1,44 @@
 package mybatis;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-import mybatis.DAO.ItemsDAO;
-import mybatis.VO.ItemsVO;
-
 public class Main {
-	static BufferedReader br;
-	static Service service;
-	public static void main(String[] args) throws Exception {
-		SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
-		SqlSessionFactory factory = builder.build(Resources.getResourceAsReader("mybatis/mybatis-config.xml"));
-		SqlSession session = factory.openSession(true);
 
-		service = new Service();
-		service.setSession(session);
-		
-		br = new BufferedReader(new InputStreamReader(System.in));
-		
-		Thread t = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				String command;
-				try {
-					while((command = br.readLine()) != null) {
-						if(command.startsWith("@@gI")) {
-							ItemsVO vo = service.getItem("ITEM001");
-							System.out.println(vo.getName());
-							System.out.println(vo.getPrice());
-						}
-					}
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+	public static void main(String[] args) {
+		ServerSocket server;
+		Socket socket;
+		SharedObject shared = new SharedObject();
+		ExecutorService es = Executors.newCachedThreadPool();
+		SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
+		SqlSessionFactory factory;
+		SqlSession session;
+
+		try {
+			factory = builder.build(Resources.getResourceAsReader("mybatis/mybatis-config.xml"));
+			session = factory.openSession(true);
+			
+			server = new ServerSocket(6020);
+			
+			while (true) {
+				socket = server.accept();
+				
+				CommandRunnable runnable = new CommandRunnable(socket, shared, session);
+				
+				shared.clients.add(runnable);
+				
+				es.execute(runnable);
 			}
-		});
-		t.start();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
-	
 }

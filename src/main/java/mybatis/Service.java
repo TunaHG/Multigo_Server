@@ -55,7 +55,7 @@ public class Service {
 	
 	/*
 	 * Add Purchase History
-	 * 처음 입장시 List(장바구니)생성
+	 * 퇴장시 결제를 진행하며 구매내역 List 생성
 	 */
 	public void addList(ListsVO vo) {
 		ldao.addList(vo);
@@ -63,7 +63,7 @@ public class Service {
 	
 	/*
 	 * Add Purchase Item
-	 * 장바구니에 Item이 추가될 때마다 세부내역 추가
+	 * Data로 넘어온 구매물품들을 추가
 	 */
 	public void addLais(LaisVO vo) {
 		lidao.addLais(vo);
