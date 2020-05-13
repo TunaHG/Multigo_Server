@@ -17,10 +17,12 @@ public class ListsDAO {
 	 * Insert New Receipt method
 	 * 사용자가 장바구니를 결제할 시 구매내역을 생성하는 method
 	 */
-	public void addList(ListsVO vo) {
+	public int addList(ListsVO vo) {
 		// Sql: INSERT INTO LISTS VALUES(LIST_SEQUENCE.NEXTVAL, SYSDATE, #{total}, #{user_id})
-		session.insert("inserList", vo);
+		// SelectKey: SELECT LIST_SEQUENCE.CURRVAL FROM DUAL
+		int result = session.insert("insertList", vo);
 		System.out.println("[ListsDAO]\tAdd new list");
+		return result;
 	}
 	
 	/*

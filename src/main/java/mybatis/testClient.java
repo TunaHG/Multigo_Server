@@ -10,8 +10,8 @@ public class testClient {
 	static BufferedReader br;
 	static BufferedReader br2;
 	static PrintWriter pw;
+	static Socket socket;
 	public static void main(String[] args) {
-		Socket socket;
 		try {
 			socket = new Socket("localhost", 6020);
 			br = new BufferedReader(new InputStreamReader(System.in));
@@ -26,11 +26,14 @@ public class testClient {
 			public void run() {
 				String line = "";
 				try {
-					pw.println("@@SetID XDFIGEFMbiaSDFMWEFIBASDMF");
+					pw.println("@@SetID USER001");
 					pw.flush();
 					while((line = br.readLine()) != null) {
-						if(line.equals("@@EXIT"))
+						if(line.equals("@@Exit")) {
+							pw.println("@@Exit 1 USER001");
+							pw.flush();
 							break;
+						}
 						pw.println(line);
 						pw.flush();
 					}
@@ -48,6 +51,12 @@ public class testClient {
 				try {
 					while((line = br2.readLine()) != null) {
 						System.out.println(line);
+						if(line.equals("@@Exit")) {
+							br.close();
+							br2.close();
+							pw.close();
+							socket.close();
+						}
 					}
 				} catch (IOException e) {
 					e.printStackTrace();

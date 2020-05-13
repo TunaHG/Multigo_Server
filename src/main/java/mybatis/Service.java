@@ -60,14 +60,9 @@ public class Service {
 	 * Add Purchase History
 	 * 퇴장시 결제를 진행하며 구매내역 List 생성
 	 */
-	public void addList(ListsVO vo) {
-		ldao.addList(vo);
+	public int addList(ListsVO vo) {
+		int result = ldao.addList(vo);
 		System.out.println("[Service]\tAdd Purchase History");
-	}
-	
-	public int getSeqVal() {
-		int result = ldao.getSeqVal();
-		System.out.println("[Service]\tGet Recent List_id");
 		return result;
 	}
 	

@@ -6,11 +6,10 @@
 	<insert id="insertList" parameterType="lists">
 		INSERT INTO LISTS 
 		VALUES(LIST_SEQUENCE.NEXTVAL, SYSDATE, #{total}, #{user_id})
+		<selectKey keyProperty="list_id" resultType="int" order="AFTER">
+			SELECT LIST_SEQUENCE.CURRVAL FROM DUAL
+		</selectKey>
 	</insert>
-	
-	<select id="selectSeqVal" resultType="int">
-		SELECT LIST_SEQUENCE.CURRVAL FROM DUAL;
-	</select>
 	
 	<select id="selectAllList" parameterType="String" resultType="lists">
 		SELECT *

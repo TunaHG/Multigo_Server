@@ -107,10 +107,9 @@ public class CommandRunnable implements Runnable {
 				}
 				// Client가 본인의 모든 이전 구매내역을 요청하는 Command
 				if(command.startsWith("@@GetAllList")) {
-					// Command: @@GetAllList [user_id]
-					String user_id = command.replace("@@GetAllList ", "");
+					// Command: @@GetAllList
 					// user_id를 이용하여 해당  user가 이전에 구매한 모든 구매내역을 가져옴
-					List<ListsVO> list = service.getAllList(user_id);
+					List<ListsVO> list = service.getAllList(this.id);
 					// 가져온 모든 구매내역을 JSON으로 변환
 					String result = new ObjectMapper().writeValueAsString(list);
 					// JSON Data Check
@@ -122,7 +121,7 @@ public class CommandRunnable implements Runnable {
 				// Client가 특정 구매내역에 대한 상세내역을 요청하는 Command
 				if(command.startsWith("@@GetAllLais")) {
 					// Command: @@GetAllLais [list_id]
-					String tmpList_id = command.replace("@@GetAllLais", "");
+					String tmpList_id = command.replace("@@GetAllLais ", "");
 					int list_id = Integer.parseInt(tmpList_id);
 					// list_id를 이용하여 해당 list에 속하는 item_id와 수량을 가져옴
 					List<LaisVO> list = service.getAllLais(list_id);
@@ -133,6 +132,16 @@ public class CommandRunnable implements Runnable {
 					// 변환된 JSON을 Client에게 전송
 					pw.println("@@GetAllLais " + result);
 					pw.flush();
+				}
+				// Client가 Market에서 퇴장 시, Market이 전송하는 Command
+				if(command.startsWith("@@Exit")) {
+					// Command: @@Exit [market_id] [user_id]
+					String[] cmd = command.split(" ");
+					int market_id = Integer.parseInt(cmd[1]);
+					String user_id = cmd[2];
+					
+					// 공용객체의 method를 이용해서 map을 갱신
+					shared.Exit(market_id, user_id);
 				}
 				// Client가 퇴장 시, 장바구니를 이용하여 구매내역 생성을 요청하는 method
 				if(command.startsWith("@@AddList")) {
@@ -147,11 +156,8 @@ public class CommandRunnable implements Runnable {
 					vo.setUser_id(this.id);
 					vo.setTotal(total);
 					// ListsVO객체를 DB로 전송하여 Table에 입력
-					service.addList(vo);
-					
-					// 생성된 list_id를 가져와서 객체에 입력
 					// Lais들을 추가할 때 list_id가 필요한데, 그곳에 사용하기 위함
-					this.list_id = service.getSeqVal();
+					this.list_id = service.addList(vo);
 				}
 				// Client가 퇴장 시, 구매내역을 생성한 이후 상세내역 생성을 요청하는 method
 				if(command.startsWith("@@AddLais")) {
@@ -165,16 +171,6 @@ public class CommandRunnable implements Runnable {
 						vo.setList_id(this.list_id);
 						service.addLais(vo);
 					}
-				}
-				// Client가 Market에서 퇴장 시, Market이 전송하는 Command
-				if(command.startsWith("@@Exit")) {
-					// Command: @@Exit [market_id] [user_id]
-					String[] cmd = command.split(" ");
-					int market_id = Integer.parseInt(cmd[1]);
-					String user_id = cmd[2];
-					
-					// 공용객체의 method를 이용해서 map을 갱신
-					shared.Exit(market_id, user_id);
 				}
 				// Client가 앱을 종료하여 Server와의 연결을 종료할 때 전송하는 Command
 				if(command.startsWith("@@Terminate")) {

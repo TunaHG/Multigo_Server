@@ -19,7 +19,7 @@ public class LaisDAO {
 	 */
 	public void addLais(LaisVO vo) {
 		// Sql: INSERT INTO LISTS_AND_ITEMS VALUES(#{list_id}, #{item_id}, #{cnt})
-		session.insert("inserLais", vo);
+		session.insert("insertLais", vo);
 		System.out.println("[LaisDAO]\tAdd Item to Receipt list");
 	}
 	
