@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="markets">
+	<!-- CRUD : insert, select, update, delete sql -->
+	<insert id="insertNewItem" parameterType="markets">
+		INSERT INTO MARKETS 
+		VALUES(#{market_id}, #{item_id}, #{stock})
+	</insert>
+	
+	<select id="currentStockInMarket" parameterType="markets" resultType="int">
+		SELECT STOCK 
+		FROM MARKETS 
+		WHERE MARKET_ID = #{market_id} AND ITEM_ID = #{item_id}
+	</select>
+	
+	<update id="updateStockInMarket" parameterType="markets">
+		UPDATE MARKETS 
+		SET STOCK = #{stock}
+		WHERE MARKET_ID = #{market_id} AND ITEM_ID = #{item_id}
+	</update>
+	
+	<delete id="deleteItemInMarket" parameterType="markets">
+		DELETE MARKETS
+		WHERE MARKET_ID = #{market_id} AND ITEM_ID = #{item_id}
+	</delete>
+</mapper>
+

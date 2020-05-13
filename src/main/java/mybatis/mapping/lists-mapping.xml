@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lists">
+	<!-- CRUD : insert, select, update, delete sql -->
+	<insert id="insertList" parameterType="lists">
+		INSERT INTO LISTS 
+		VALUES(LIST_SEQUENCE.NEXTVAL, SYSDATE, #{total}, #{user_id})
+		<selectKey keyProperty="list_id" resultType="int" order="AFTER">
+			SELECT LIST_SEQUENCE.CURRVAL FROM DUAL
+		</selectKey>
+	</insert>
+	
+	<select id="selectAllList" parameterType="String" resultType="lists">
+		SELECT *
+		FROM LISTS
+		WHERE USER_ID = #{user_id}
+	</select>
+	
+	<!-- <update id="updateListTotal" parameterType="lists">
+		UPDATE LISTS
+		SET TOTAL = #{total}
+		WHERE LIST_ID = #{list_id}
+	</update>
+	
+	<update id="updateListDate" parameterType="lists">
+		UPDATE LISTS
+		SET PURCHASE_DATE = #{purchase_date}
+		WHERE LIST_ID = #{list_id}
+	</update>
+	
+	<delete id="deleteList" parameterType="int">
+		DELETE LISTS
+		WHERE LIST_ID = #{list_id}
+	</delete> -->
+</mapper>
+

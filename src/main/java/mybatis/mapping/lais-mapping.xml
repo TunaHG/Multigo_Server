@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lais">
+	<!-- CRUD : insert, select, update, delete sql -->
+	<insert id="insertLais" parameterType="lais">
+		INSERT INTO LISTS_AND_ITEMS
+		VALUES(#{list_id}, #{item_id}, #{cnt})
+	</insert>
+	
+	<select id="selectLais" parameterType="int" resultType="lais">
+		SELECT ITEM_ID, CNT
+		FROM LISTS_AND_ITEMS
+		WHERE LIST_ID = #{list_id}
+	</select>
+	
+	<update id="updateLais" parameterType="lais">
+		UPDATE LISTS_AND_ITEMS
+		SET CNT = #{cnt}
+		WHERE LIST_ID = #{list_id} AND ITEM_ID = #{item_id}
+	</update>
+	
+	<delete id="deleteLais" parameterType="lais">
+		DELETE LISTS_AND_ITEMS
+		WHERE LIST_ID = #{list_id} AND ITEM_ID = #{item_id}
+	</delete>
+</mapper>
+
