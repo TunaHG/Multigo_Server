@@ -34,9 +34,6 @@ public class testClient {
 						pw.println(line);
 						pw.flush();
 					}
-					while((line = br2.readLine()) != null) {
-						System.out.println(line);
-					}
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -44,6 +41,20 @@ public class testClient {
 			}
 		});
 		t.start();
+		Thread t2 = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				String line = "";
+				try {
+					while((line = br2.readLine()) != null) {
+						System.out.println(line);
+					}
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		t2.start();
 	}
 
 }

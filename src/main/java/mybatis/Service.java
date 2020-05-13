@@ -32,7 +32,7 @@ public class Service {
 	 */
 	public ItemsVO getItem(String item_id) {
 		ItemsVO vo = idao.getItem(item_id);
-		System.out.println("[Server]\t[Service]\tGet Item Data");
+		System.out.println("[Service]\tGet Item Data");
 		return vo;
 	}
 	
@@ -42,7 +42,7 @@ public class Service {
 	 */
 	public List<ListsVO> getAllList(String user_id){
 		List<ListsVO> list = ldao.getAllList(user_id);
-		System.out.println("[Server]\t[Service]\tGet user's all purchase history");
+		System.out.println("[Service]\tGet user's all purchase history");
 		return list;
 	}
 	
@@ -52,7 +52,7 @@ public class Service {
 	 */
 	public List<LaisVO> getAllLais(int list_id){
 		List<LaisVO> list = lidao.getAllLais(list_id);
-		System.out.println("[Server]\t[Service]\tGet history's all items");
+		System.out.println("[Service]\tGet history's all items");
 		return list;
 	}
 	
@@ -62,7 +62,13 @@ public class Service {
 	 */
 	public void addList(ListsVO vo) {
 		ldao.addList(vo);
-		System.out.println("[Server]\t[Service]\tAdd Purchase History");
+		System.out.println("[Service]\tAdd Purchase History");
+	}
+	
+	public int getSeqVal() {
+		int result = ldao.getSeqVal();
+		System.out.println("[Service]\tGet Recent List_id");
+		return result;
 	}
 	
 	/*
@@ -71,7 +77,7 @@ public class Service {
 	 */
 	public void addLais(LaisVO vo) {
 		lidao.addLais(vo);
-		System.out.println("[Server]\t[Service]\tAdd Purchase Item");
+		System.out.println("[Service]\tAdd Purchase Item");
 	}
 	
 	/*
@@ -80,6 +86,6 @@ public class Service {
 	 */
 	public void updateStockInMarket(MarketsVO vo) {
 		mdao.updateStockInMarket(vo);
-		System.out.println("[Server]\t[Service]\tUpdate Item's stock");
+		System.out.println("[Service]\tUpdate Item's stock");
 	}
 }

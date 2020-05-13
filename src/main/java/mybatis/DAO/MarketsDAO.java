@@ -24,7 +24,7 @@ public class MarketsDAO {
 	public void addNewItem(MarketsVO vo) {
 		// Sql: INSERT INTO MARKETS VALUES(#{market_id}, #{item_id}, #{stock})
 		session.insert("insertNewItem", vo);
-		System.out.println("[Server]\t[MarketsDAO]\tNew Item Added");
+		System.out.println("[MarketsDAO]\tNew Item Added");
 	}
 	
 	/*
@@ -36,7 +36,7 @@ public class MarketsDAO {
 	public int getCurrentStockInMarket(MarketsVO vo) {
 		// Sql: SELECT STOCK FROM MARKETS WHERE MARKET_ID = #{market_id} AND ITEM_ID = #{item_id}
 		int stock = session.selectOne("currentStockInMarket", vo);
-		System.out.println("[Server]\t[MarketsDAO]\tGet Current Stock");
+		System.out.println("[MarketsDAO]\tGet Current Stock");
 		return stock;
 	}
 	
@@ -49,7 +49,7 @@ public class MarketsDAO {
 	public void updateStockInMarket(MarketsVO vo) {
 		// Sql: UPDATE MARKETS SET STOCK = #{stock} WHERE MARKET_ID = #{market_id} AND ITEM_ID = #{item_id}
 		session.update("updateStockInMarket", vo);
-		System.out.println("[Server]\t[MarketsDAO]\tUpdate Stock");
+		System.out.println("[MarketsDAO]\tUpdate Stock");
 	}
 	
 	/*
@@ -61,6 +61,6 @@ public class MarketsDAO {
 	public void deleteItemInMarket(MarketsVO vo) {
 		// Sql: DELETE MARKETS WHERE MARKET_ID = #{market_id} AND ITEM_ID = #{item_id}
 		session.delete("deleteItemInMarket", vo);
-		System.out.println("[Server]\t[MarketsDAO]\tDelete Item");
+		System.out.println("[MarketsDAO]\tDelete Item");
 	}
 }

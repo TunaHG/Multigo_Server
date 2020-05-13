@@ -19,7 +19,7 @@ public class ItemsDAO {
 	public void addItem(ItemsVO vo) {
 		// Sql: INSERT INTO ITEMS VALUES(#{item_id}, #{name}, #{price})
 		session.insert("insertItem", vo);
-		System.out.println("[Server]\t[ItemDAO]\tInsert New Item");
+		System.out.println("[ItemDAO]\tInsert New Item");
 	}
 	
 	/*
@@ -31,7 +31,7 @@ public class ItemsDAO {
 	public ItemsVO getItem(String item_id) {
 		// Sql: SELECT * FROM ITEMS WHERE ITEM_ID = #{item_id}
 		ItemsVO vo = session.selectOne("selectItem", item_id);
-		System.out.println("[Server]\t[ItemDAO]\tGet Item");
+		System.out.println("[ItemDAO]\tGet Item");
 		return vo;
 	}
 	
@@ -44,7 +44,7 @@ public class ItemsDAO {
 	public void updateItem(ItemsVO vo) {
 		// Sql: UPDATE ITEMS SET NAME = #{name}, PRICE = #{price} WHERE ITEM_ID = #{item_id}
 		session.update("updateItem", vo);
-		System.out.println("[Server]\t[ItemDAO]\tUpdate Item");
+		System.out.println("[ItemDAO]\tUpdate Item");
 	}
 	
 	/*
@@ -56,6 +56,6 @@ public class ItemsDAO {
 	public void deleteItem(ItemsVO vo) {
 		// Sql: DELETE ITEMS WHERE ITEM_ID = #{item_id}
 		session.delete("deleteItem", vo);
-		System.out.println("[Server]\t[ItemDAO]\tDelete Item");
+		System.out.println("[ItemDAO]\tDelete Item");
 	}
 }

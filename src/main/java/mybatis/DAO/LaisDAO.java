@@ -20,7 +20,7 @@ public class LaisDAO {
 	public void addLais(LaisVO vo) {
 		// Sql: INSERT INTO LISTS_AND_ITEMS VALUES(#{list_id}, #{item_id}, #{cnt})
 		session.insert("inserLais", vo);
-		System.out.println("[Server]\t[LaisDAO]\tAdd Item to Receipt list");
+		System.out.println("[LaisDAO]\tAdd Item to Receipt list");
 	}
 	
 	/*
@@ -31,7 +31,7 @@ public class LaisDAO {
 	public List<LaisVO> getAllLais(int list_id) {
 		// Sql: SELECT ITEM_ID, CNT FROM LISTS_AND_ITEMS WHERE LIST_ID = #{list_id}
 		List<LaisVO> vo = session.selectList("selectLais", list_id);
-		System.out.println("[Server]\t[LaisDAO]\tGet Detail List about Receipt");
+		System.out.println("[LaisDAO]\tGet Detail List about Receipt");
 		return vo;
 	}
 	
@@ -43,7 +43,7 @@ public class LaisDAO {
 //	public void updateLais(LaisVO vo) {
 //		// Sql: UPDATE LISTS_AND_ITEMS SET CNT = #{cnt} WHERE LIST_ID = #{list_id} AND ITEM_ID = #{item_id}
 //		session.update("updateLais", vo);
-//		System.out.println("[Server]\t[LaisDAO]\tUpdate Item's Count in Receipt list");
+//		System.out.println("[LaisDAO]\tUpdate Item's Count in Receipt list");
 //	}
 	
 	/*
@@ -54,6 +54,6 @@ public class LaisDAO {
 //	public void deleteLais(LaisVO vo) {
 //		// Sql: DELETE LISTS_AND_ITEMS WHERE LIST_ID = #{list_id} AND ITEM_ID = #{item_id}
 //		session.delete("deleteLais", vo);
-//		System.out.println("[Server]\t[LaisDAO]\tDelete Item in Receipt");
+//		System.out.println("[LaisDAO]\tDelete Item in Receipt");
 //	}
 }

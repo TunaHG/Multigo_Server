@@ -8,6 +8,10 @@
 		VALUES(LIST_SEQUENCE.NEXTVAL, SYSDATE, #{total}, #{user_id})
 	</insert>
 	
+	<select id="selectSeqVal" resultType="int">
+		SELECT LIST_SEQUENCE.CURRVAL FROM DUAL;
+	</select>
+	
 	<select id="selectAllList" parameterType="String" resultType="lists">
 		SELECT *
 		FROM LISTS

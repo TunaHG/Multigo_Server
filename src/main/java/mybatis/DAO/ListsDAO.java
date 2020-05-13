@@ -1,4 +1,4 @@
-package mybatis.DAO;
+	package mybatis.DAO;
 
 import java.util.List;
 
@@ -18,9 +18,21 @@ public class ListsDAO {
 	 * 사용자가 장바구니를 결제할 시 구매내역을 생성하는 method
 	 */
 	public void addList(ListsVO vo) {
-		// Sql: INSERT INTO LISTS VALUES(LIST_SEQUENCE.NEXTVAL, #{purchase_date}, #{total}, #{user_id})
+		// Sql: INSERT INTO LISTS VALUES(LIST_SEQUENCE.NEXTVAL, SYSDATE, #{total}, #{user_id})
 		session.insert("inserList", vo);
-		System.out.println("[Server]\t[ListsDAO]\tAdd new list");
+		System.out.println("[ListsDAO]\tAdd new list");
+	}
+	
+	/*
+	 * # Included in Service
+	 * Get List_Sequence's Current value
+	 * List가 새로 등록되었을 때, 해당 List_id를 가져오기 위하여 사용하는 method
+	 */
+	public int getSeqVal() {
+		// Sql: SELECT LIST_SEQUENCE.CURRVAL FROM DUAL;
+		int result = session.selectOne("selectSeqVal");
+		System.out.println("[ListsDAO]\tGet List_seq Current value");
+		return result;
 	}
 	
 	/*
@@ -31,7 +43,7 @@ public class ListsDAO {
 	public List<ListsVO> getAllList(String user_id){
 		// Sql: SELECT * FROM LISTS WHERE USER_ID = #{user_id}
 		List<ListsVO> list = session.selectList("selectAllList", user_id);
-		System.out.println("[Server]\t[ListsDAO]\tGet User's All Receipt");
+		System.out.println("[ListsDAO]\tGet User's All Receipt");
 		return list;
 	}
 	
@@ -43,7 +55,7 @@ public class ListsDAO {
 //	public void updateListTotal(ListsVO vo) {
 //		// Sql: UPDATE LISTS SET TOTAL = #{total} WHERE LIST_ID = #{list_id}
 //		session.update("updateListTotal", vo);
-//		System.out.println("[Server]\t[ListsDAO]\tUpdate List's Total");
+//		System.out.println("[ListsDAO]\tUpdate List's Total");
 //	}
 	
 	/*
@@ -54,7 +66,7 @@ public class ListsDAO {
 //	public void updateListDate(ListsVO vo) {
 //		// Sql: UPDATE LISTS SET PURCHASE_DATE = #{purchase_date} WHERE LIST_ID = #{list_id}
 //		session.update("updateListDate", vo);
-//		System.out.println("[Server]\t[ListsDAO]\tUpdate List's Purchase Date");
+//		System.out.println("[ListsDAO]\tUpdate List's Purchase Date");
 //	}
 	
 	/*
@@ -67,6 +79,6 @@ public class ListsDAO {
 //	public void deleteList(int list_id) {
 //		// Sql: DELETE LISTS WHERE LIST_ID = #{list_id}
 //		session.delete("deleteList", list_id);
-//		System.out.println("[Server]\t[ListsDAO]\tDelete List");
+//		System.out.println("[ListsDAO]\tDelete List");
 //	}
 }
