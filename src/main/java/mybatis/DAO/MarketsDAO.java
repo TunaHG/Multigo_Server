@@ -47,7 +47,8 @@ public class MarketsDAO {
 	 * 해당 매장에 존재하는 Item의 재고 개수를 Update하는 경우 사용하는 method
 	 */
 	public void updateStockInMarket(MarketsVO vo) {
-		// Sql: UPDATE MARKETS SET STOCK = #{stock} WHERE MARKET_ID = #{market_id} AND ITEM_ID = #{item_id}
+		// Sql: UPDATE MARKETS SET STOCK = STOCK - #{stock} WHERE MARKET_ID = #{market_id} AND ITEM_ID = #{item_id}
+		System.out.println("[MarketsDAO]\t" + vo.getMarket_id() + " " + vo.getItem_id() + " " + vo.getStock());
 		session.update("updateStockInMarket", vo);
 		System.out.println("[MarketsDAO]\tUpdate Stock");
 	}

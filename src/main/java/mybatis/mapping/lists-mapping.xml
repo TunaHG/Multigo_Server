@@ -6,8 +6,8 @@
 	<insert id="insertList" parameterType="lists">
 		INSERT INTO LISTS 
 		VALUES(LIST_SEQUENCE.NEXTVAL, SYSDATE, #{total}, #{user_id})
-		<selectKey keyProperty="list_id" resultType="int" order="AFTER">
-			SELECT LIST_SEQUENCE.CURRVAL FROM DUAL
+		<selectKey keyProperty="list_id" resultType="Integer" order="AFTER">
+			SELECT LIST_SEQUENCE.CURRVAL as list_id FROM DUAL
 		</selectKey>
 	</insert>
 	

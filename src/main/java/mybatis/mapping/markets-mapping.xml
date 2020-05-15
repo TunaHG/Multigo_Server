@@ -16,7 +16,7 @@
 	
 	<update id="updateStockInMarket" parameterType="markets">
 		UPDATE MARKETS 
-		SET STOCK = #{stock}
+		SET STOCK = STOCK - #{stock}
 		WHERE MARKET_ID = #{market_id} AND ITEM_ID = #{item_id}
 	</update>
 	

@@ -1,4 +1,4 @@
-	package mybatis.DAO;
+package mybatis.DAO;
 
 import java.util.List;
 
@@ -20,21 +20,9 @@ public class ListsDAO {
 	public int addList(ListsVO vo) {
 		// Sql: INSERT INTO LISTS VALUES(LIST_SEQUENCE.NEXTVAL, SYSDATE, #{total}, #{user_id})
 		// SelectKey: SELECT LIST_SEQUENCE.CURRVAL FROM DUAL
-		int result = session.insert("insertList", vo);
+		session.insert("insertList", vo);
 		System.out.println("[ListsDAO]\tAdd new list");
-		return result;
-	}
-	
-	/*
-	 * # Included in Service
-	 * Get List_Sequence's Current value
-	 * List가 새로 등록되었을 때, 해당 List_id를 가져오기 위하여 사용하는 method
-	 */
-	public int getSeqVal() {
-		// Sql: SELECT LIST_SEQUENCE.CURRVAL FROM DUAL;
-		int result = session.selectOne("selectSeqVal");
-		System.out.println("[ListsDAO]\tGet List_seq Current value");
-		return result;
+		return vo.getList_id();
 	}
 	
 	/*

@@ -29,9 +29,11 @@ public class Main {
 			session = factory.openSession(true);
 			
 			server = new ServerSocket(6020);
+			System.out.println("[MainServer]\tWaiting Client...");
 			
 			while (true) {
 				socket = server.accept();
+				System.out.println("[MainServer]\tClient Connected!");
 				
 				CommandRunnable runnable = new CommandRunnable(socket, shared, session);
 				

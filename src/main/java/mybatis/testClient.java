@@ -32,7 +32,7 @@ public class testClient {
 						if(line.equals("@@Exit")) {
 							pw.println("@@Exit 1 USER001");
 							pw.flush();
-							break;
+							continue;
 						}
 						pw.println(line);
 						pw.flush();
@@ -51,12 +51,12 @@ public class testClient {
 				try {
 					while((line = br2.readLine()) != null) {
 						System.out.println(line);
-						if(line.equals("@@Exit")) {
-							br.close();
-							br2.close();
-							pw.close();
-							socket.close();
-						}
+//						if(line.equals("@@Exit")) {
+//							br.close();
+//							br2.close();
+//							pw.close();
+//							socket.close();
+//						}
 					}
 				} catch (IOException e) {
 					e.printStackTrace();

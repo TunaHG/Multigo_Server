@@ -43,6 +43,7 @@ public class SharedObject {
 		for(CommandRunnable client : clients) {
 			if(client.getId() != null && client.getId().equals(user_id)) {
 				list.add(client);
+				client.setEnteredMarket(market_id);
 				// Client에게 입장하였다는 신호를 전송
 				client.getPw().println("@@Enter");
 				client.getPw().flush();

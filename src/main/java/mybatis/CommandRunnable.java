@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -15,16 +16,27 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import mybatis.VO.ItemsVO;
 import mybatis.VO.LaisVO;
 import mybatis.VO.ListsVO;
+import mybatis.VO.MarketsVO;
 
 public class CommandRunnable implements Runnable {
 	private String id;
 	private int list_id;
+	private int enteredMarket = 0;
+	private List<String> enteredClient = new ArrayList<>();
 	private Socket socket;
 	private SharedObject shared;
 	private BufferedReader br;
 	private PrintWriter pw;
 	private Service service = new Service();
 	
+	public int getEnteredMarket() {
+		return enteredMarket;
+	}
+
+	public void setEnteredMarket(int enteredMarket) {
+		this.enteredMarket = enteredMarket;
+	}
+
 	public String getId() {
 		return id;
 	}
@@ -66,19 +78,19 @@ public class CommandRunnable implements Runnable {
 					String id = command.replace("@@SetID ", "");
 					// 공용객체 method를 활용하여 Server에 접속중인 Clients를 탐색
 					// 동일한 ID를 가진 Client가 존재한다면 true
-					boolean detect = shared.duplicateDetection(id);
+//					boolean detect = shared.duplicateDetection(id);
 					// 동일한 ID가 이미 접속중이라면,
-					if(detect) {
+//					if(detect) {
 						// 중복되었다는 Message를 다시 Client에게 전송
-						pw.println("@@Duplicate");
-						pw.flush();
-					} else {
+//						pw.println("@@Duplicate");
+//						pw.flush();
+//					} else {
 						// 현재 Runnable객체의 id값을 user_id로 변경
 						this.id = id;
 						// 중복되지 않았고 접속했다는 Message를 전송
 						pw.println("@@SetID " + this.id);
 						pw.flush();
-					}
+//					}
 				}
 				// Client가 Market에 입장 시, Market이 전송하는 Command
 				if(command.startsWith("@@Enter")) {
@@ -87,9 +99,13 @@ public class CommandRunnable implements Runnable {
 					// Command에서 각 내용을 추출
 					int market_id = Integer.parseInt(cmd[1]);
 					String user_id = cmd[2];
-					
-					// 공용객체의 method를 이용하여 map을 갱신
-					shared.Enter(market_id, user_id);
+					if(!enteredClient.contains(user_id)) {
+						// 공용객체의 method를 이용하여 map을 갱신
+						shared.Enter(market_id, user_id);
+						enteredClient.add(user_id);
+					} else {
+						command = command.replace("Enter", "Exit");
+					}
 				}
 				// Client가 특정 Item의 정보를 요청하는 Command
 				if(command.startsWith("@@GetItem")) {
@@ -140,6 +156,7 @@ public class CommandRunnable implements Runnable {
 					int market_id = Integer.parseInt(cmd[1]);
 					String user_id = cmd[2];
 					
+					enteredClient.remove(user_id);
 					// 공용객체의 method를 이용해서 map을 갱신
 					shared.Exit(market_id, user_id);
 				}
@@ -166,18 +183,32 @@ public class CommandRunnable implements Runnable {
 					// 가져온 JSON Data를 VO를 활용한 List객체로 변환
 					List<LaisVO> list = new ObjectMapper().readValue(jsonData, new TypeReference<List<LaisVO>>() {});
 					
+					MarketsVO market = new MarketsVO();
 					for(LaisVO vo : list) {
 						// 각 VO마다 DB로 전송하여 Table에 입력
 						vo.setList_id(this.list_id);
 						service.addLais(vo);
+						
+						// 구매한 각 Item마다 매장의 재고를 update하여 Table에 입력
+						market.setItem_id(vo.getItem_id());
+						market.setMarket_id(enteredMarket);
+						market.setStock(vo.getCnt());
+						service.updateStockInMarket(market);
+						System.out.println(market.getItem_id() + " " + market.getMarket_id() + " " + market.getStock());
 					}
+					
+					enteredMarket = 0;
 				}
 				// Client가 앱을 종료하여 Server와의 연결을 종료할 때 전송하는 Command
 				if(command.startsWith("@@Terminate")) {
 					// 공용객체의 method를 이용
 					// Server에 접속중인 모든 Client를 의미하는 clients에서 제거
 					shared.Terminate(id);
+					for(CommandRunnable client : shared.clients) {
+						System.out.print(client.getId() + " ");
+					}
 				}
+				System.out.println("[Command]\t" + command);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
